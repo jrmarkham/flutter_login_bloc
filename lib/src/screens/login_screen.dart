@@ -17,6 +17,7 @@ class LoginScreen extends StatelessWidget{
   Widget build(context){
     /// SCOPED BLOC
     final bloc_scoped = Provider.of(context);
+
     return Container(
         margin: EdgeInsets.only(top:50.0, bottom: 25.0, left:25.0, right: 25.0),
 
@@ -29,7 +30,6 @@ class LoginScreen extends StatelessWidget{
             // USE CONTAIN FOR JUST MARGIN SPACING
             Container(margin: EdgeInsets.only(top: 35.0)),
             submitButton(bloc_scoped),
-            resetButton(bloc_scoped)
 
 
           ],
@@ -104,25 +104,6 @@ Widget submitButton(Bloc blocScope) {
         child: Text('Submit'),
       );
     }
-  );
-}
-
-Widget resetButton(Bloc blocScope) {
-  return StreamBuilder(
-    /// GLOBAL BLOC
-    //  stream: bloc_global.submitValid,
-    /// SCOPED BLOC
-      stream: blocScope.submitValid,
-      builder: (context, snapshot){
-        return RaisedButton(
-          /// GLOBAL BLOC
-          //  onPressed:bloc_global.reset,
-          /// SCOPED BLOC
-          onPressed:blocScope.reset,
-          color: Colors.green,
-          child: Text('Reset'),
-        );
-      }
   );
 }
 

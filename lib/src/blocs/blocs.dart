@@ -28,12 +28,6 @@ class Bloc extends Object with Validators{
     print(' submitting email:$validEmail and password: $validPassword');
 
   }
-
-
-  reset(){
-
-  }
-
   // close sinks
   dispose(){
     _email.close();
