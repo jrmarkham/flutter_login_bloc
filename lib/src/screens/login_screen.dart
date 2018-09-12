@@ -28,8 +28,8 @@ class LoginScreen extends StatelessWidget{
             passwordField(bloc_scoped),
             // USE CONTAIN FOR JUST MARGIN SPACING
             Container(margin: EdgeInsets.only(top: 35.0)),
-            submitButton(),
-            resetButton()
+            submitButton(bloc_scoped),
+            resetButton(bloc_scoped)
 
 
           ],
@@ -88,23 +88,41 @@ Widget passwordField(Bloc blocScope) {
   );
 }
 
-Widget submitButton() {
-  return RaisedButton(
-    onPressed: () {
-      print('sumit');
-    },
-    color: Colors.blue,
-    child: Text('Submit'),
+Widget submitButton(Bloc blocScope) {
+  return StreamBuilder(
+    /// GLOBAL BLOC
+    //  stream: bloc_global.submitValid,
+    /// SCOPED BLOC
+    stream: blocScope.submitValid,
+    builder: (context, snapshot){
+      return RaisedButton(
+        /// GLOBAL BLOC
+        //   onPressed: snapshot.hasData?bloc_global.submit:null,
+        /// SCOPED BLOC
+        onPressed: snapshot.hasData?blocScope.submit:null,
+        color: Colors.blue,
+        child: Text('Submit'),
+      );
+    }
   );
 }
 
-Widget resetButton() {
-  return RaisedButton(
-    onPressed: () {
-      print('reset');
-    },
-    color: Colors.green,
-    child: Text('Reset'),
+Widget resetButton(Bloc blocScope) {
+  return StreamBuilder(
+    /// GLOBAL BLOC
+    //  stream: bloc_global.submitValid,
+    /// SCOPED BLOC
+      stream: blocScope.submitValid,
+      builder: (context, snapshot){
+        return RaisedButton(
+          /// GLOBAL BLOC
+          //  onPressed:bloc_global.reset,
+          /// SCOPED BLOC
+          onPressed:blocScope.reset,
+          color: Colors.green,
+          child: Text('Reset'),
+        );
+      }
   );
 }
 
